@@ -16,8 +16,4 @@ spec:
     rollingUpdate:
       maxSurge: 25%
       maxUnavailable: 25%
-<<<<<<< HEAD
   # Wrong : should contain template
-=======
-  # 錯誤：必須包含 template 欄位 (PodTemplateSpec)
->>>>>>> 34c8534f562dda0e041a17986549af9e8c003fe4

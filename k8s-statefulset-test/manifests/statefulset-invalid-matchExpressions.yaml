@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: test-invalid-matchExpressions
+spec:
+  minReadySeconds: 5
+  ordinals:
+    start: 0
+  persistentVolumeClaimRetentionPolicy:
+    whenDeleted: Delete
+    whenScaled: Retain
+  podManagementPolicy: OrderedReady
+  replicas: 2
+  revisionHistoryLimit: 5
+  selector:
+    matchExpressions:
+      - operator: In       # Error: 'key' is missing.
+        values: "app-value"  # Error: 'values' should be an array.
+  serviceName: "test-service"
+  template:
+    metadata:
+      labels:
+        app: test-invalid-matchExpressions
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest

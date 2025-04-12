@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: test-invalid-revisionHistoryLimit
+spec:
+  minReadySeconds: 5
+  ordinals:
+    start: 0
+  persistentVolumeClaimRetentionPolicy:
+    whenDeleted: Delete
+    whenScaled: Retain
+  podManagementPolicy: OrderedReady
+  replicas: 2
+  revisionHistoryLimit: "5"  # Error: 'revisionHistoryLimit' should be an integer.
+  selector:
+    matchLabels:
+      app: test-invalid-revisionHistoryLimit
+  serviceName: "test-service"
+  template:
+    metadata:
+      labels:
+        app: test-invalid-revisionHistoryLimit
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest

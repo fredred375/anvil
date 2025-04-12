@@ -7,11 +7,7 @@ spec:
   paused: false
   progressDeadlineSeconds: 600
   replicas: 3
-<<<<<<< HEAD
   revisionHistoryLimit: "ten"   # wrong : should be int
-=======
-  revisionHistoryLimit: "ten"   # 錯誤：應為整數
->>>>>>> 34c8534f562dda0e041a17986549af9e8c003fe4
   selector:
     matchLabels:
       app: myapp

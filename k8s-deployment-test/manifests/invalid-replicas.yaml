@@ -6,11 +6,7 @@ spec:
   minReadySeconds: 10
   paused: false
   progressDeadlineSeconds: 600
-<<<<<<< HEAD
   replicas: -1         # Wrong : should be greater than 0
-=======
-  replicas: -1         # 錯誤：replicas 應為 0 或正整數
->>>>>>> 34c8534f562dda0e041a17986549af9e8c003fe4
   revisionHistoryLimit: 10
   selector:
     matchLabels:

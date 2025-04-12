@@ -13,11 +13,7 @@ spec:
       app: myapp
   strategy:
     type: RollingUpdate
-<<<<<<< HEAD
     rollingUpdate: "should be an object"   # Wrong: should contain object maxSurge and maxUnavailable
-=======
-    rollingUpdate: "should be an object"   # 錯誤：需提供物件格式，包含 maxSurge 與 maxUnavailable
->>>>>>> 34c8534f562dda0e041a17986549af9e8c003fe4
   template:
     metadata:
       labels:

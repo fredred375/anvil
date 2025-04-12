@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: test-invalid-minReady
+spec:
+  minReadySeconds: "10"    # Wrong : should be int
+  ordinals:
+    start: 0
+  persistentVolumeClaimRetentionPolicy:
+    whenDeleted: Delete
+    whenScaled: Retain
+  podManagementPolicy: OrderedReady
+  replicas: 2
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+      app: test-invalid
+  serviceName: "test-service"
+  template:
+    metadata:
+      labels:
+        app: test-invalid
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest

@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: example-statefulset
+spec:
+  minReadySeconds: 10
+  ordinals:
+    start: 0
+  persistentVolumeClaimRetentionPolicy:
+    whenDeleted: Delete    # 假設允許的值：Delete 或 Retain
+    whenScaled: Retain
+  podManagementPolicy: OrderedReady   # 僅允許：OrderedReady 或 Parallel
+  replicas: 3
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: example
+  serviceName: "example-service"
+  template:
+    metadata:
+      labels:
+        app: example
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest

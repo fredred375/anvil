@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: test-invalid-policy
+spec:
+  minReadySeconds: 5
+  ordinals:
+    start: 0
+  persistentVolumeClaimRetentionPolicy:
+    whenDeleted: Delete
+    whenScaled: Retain
+  podManagementPolicy: "InvalidPolicy"  # Wrong: only OrderedReady or Parallel
+  replicas: 2
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+      app: test-invalid-policy
+  serviceName: "test-service"
+  template:
+    metadata:
+      labels:
+        app: test-invalid-policy
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest

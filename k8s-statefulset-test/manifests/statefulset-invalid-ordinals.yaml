@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: test-invalid-ordinals
+spec:
+  minReadySeconds: 5
+  ordinals:
+    start: "0"  # Error: 'start' should be an integer.
+  persistentVolumeClaimRetentionPolicy:
+    whenDeleted: Delete
+    whenScaled: Retain
+  podManagementPolicy: OrderedReady
+  replicas: 2
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+      app: test-invalid-ordinals
+  serviceName: "test-service"
+  template:
+    metadata:
+      labels:
+        app: test-invalid-ordinals
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest

@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: test-invalid-replicas
+spec:
+  minReadySeconds: 5
+  ordinals:
+    start: 0
+  persistentVolumeClaimRetentionPolicy:
+    whenDeleted: Delete
+    whenScaled: Retain
+  podManagementPolicy: OrderedReady
+  replicas: -1  # Error: 'replicas' should be int greater than -1
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+      app: test-invalid-replicas
+  serviceName: "test-service"
+  template:
+    metadata:
+      labels:
+        app: test-invalid-replicas
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest

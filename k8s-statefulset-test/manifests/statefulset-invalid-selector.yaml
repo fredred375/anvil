@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: test-invalid-selector
+spec:
+  minReadySeconds: 5
+  ordinals:
+    start: 0
+  persistentVolumeClaimRetentionPolicy:
+    whenDeleted: Delete
+    whenScaled: Retain
+  podManagementPolicy: OrderedReady
+  replicas: 2
+  revisionHistoryLimit: 5
+  selector: {}  # Error: selector must include matchLabels or matchExpressions.
+  serviceName: "test-service"
+  template:
+    metadata:
+      labels:
+        app: test-invalid-selector
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest

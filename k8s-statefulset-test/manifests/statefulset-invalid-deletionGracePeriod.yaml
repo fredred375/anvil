@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: test-invalid-deletionGracePeriod
+spec:
+  minReadySeconds: 5
+  ordinals:
+    start: 0
+  persistentVolumeClaimRetentionPolicy:
+    whenDeleted: Delete
+    whenScaled: Retain
+  podManagementPolicy: OrderedReady
+  replicas: 2
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+      app: test-invalid-deletionGracePeriod
+  serviceName: "test-service"
+  template:
+    metadata:
+      deletionGracePeriodSeconds: "30"  # Error: Should be an integer.
+      labels:
+        app: test-invalid-deletionGracePeriod
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest

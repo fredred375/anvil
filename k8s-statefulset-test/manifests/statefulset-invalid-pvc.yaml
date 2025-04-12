@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: test-invalid-pvc
+spec:
+  minReadySeconds: 5
+  ordinals:
+    start: 0
+  persistentVolumeClaimRetentionPolicy:
+    whenDeleted: "WrongValue"   # 錯誤示範，非允許的值（例如正確值可能為 Delete 或 Retain）
+    whenScaled: "WrongValue"      # 同上
+  podManagementPolicy: OrderedReady
+  replicas: 2
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+      app: test-invalid-pvc
+  serviceName: "test-service"
+  template:
+    metadata:
+      labels:
+        app: test-invalid-pvc
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest

@@ -15,11 +15,7 @@ spec:
     type: RollingUpdate
     rollingUpdate:
       maxSurge: 25%
-<<<<<<< HEAD
       maxUnavailable: [25]   # Wrong : should be int or string
-=======
-      maxUnavailable: [25]   # 錯誤：maxUnavailable 應為整數或字串，不可為陣列
->>>>>>> 34c8534f562dda0e041a17986549af9e8c003fe4
   template:
     metadata:
       labels:

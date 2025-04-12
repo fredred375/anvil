@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: test-invalid-managedFields
+spec:
+  minReadySeconds: 5
+  ordinals:
+    start: 0
+  persistentVolumeClaimRetentionPolicy:
+    whenDeleted: Delete
+    whenScaled: Retain
+  podManagementPolicy: OrderedReady
+  replicas: 2
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+      app: test-invalid-managedFields
+  serviceName: "test-service"
+  template:
+    metadata:
+      labels:
+        app: test-invalid-managedFields
+      managedFields:
+        - apiVersion: apps/v1
+          # Error: Missing required fields such as 'fieldsType', 'fieldsV1', 'manager', 'operation', and 'time'.
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
