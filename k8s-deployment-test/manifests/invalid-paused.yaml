@@ -4,7 +4,11 @@ metadata:
   name: invalid-paused
 spec:
   minReadySeconds: 10
+<<<<<<< HEAD
   paused: 1    # Wrong : should be boolen (true/false)
+=======
+  paused: 1    # 錯誤: 應為布林值 (true/false)
+>>>>>>> 34c8534f562dda0e041a17986549af9e8c003fe4
   progressDeadlineSeconds: 600
   replicas: 3
   revisionHistoryLimit: 10

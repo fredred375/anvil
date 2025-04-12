@@ -3,7 +3,11 @@ kind: Deployment
 metadata:
   name: invalid-minReadySeconds
 spec:
+<<<<<<< HEAD
   minReadySeconds: "ten"  # wrong : should be int 
+=======
+  minReadySeconds: "ten"  # 錯誤: 應輸入整數
+>>>>>>> 34c8534f562dda0e041a17986549af9e8c003fe4
   paused: false
   progressDeadlineSeconds: 600
   replicas: 3

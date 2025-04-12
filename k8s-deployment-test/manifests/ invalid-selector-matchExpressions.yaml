@@ -10,7 +10,11 @@ spec:
   revisionHistoryLimit: 10
   selector:
     matchExpressions:
+<<<<<<< HEAD
       - operator: In          # Wrong
+=======
+      - operator: In          # 錯誤：缺少 key 欄位
+>>>>>>> 34c8534f562dda0e041a17986549af9e8c003fe4
         values:
           - myapp
     matchLabels:

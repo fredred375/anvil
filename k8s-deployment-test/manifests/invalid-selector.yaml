@@ -8,7 +8,11 @@ spec:
   progressDeadlineSeconds: 600
   replicas: 3
   revisionHistoryLimit: 10
+<<<<<<< HEAD
   selector: {}   # Wrong : selector should not be Null
+=======
+  selector: {}   # 錯誤: selector 必須包含 matchLabels 或 matchExpressions
+>>>>>>> 34c8534f562dda0e041a17986549af9e8c003fe4
   strategy:
     type: RollingUpdate
     rollingUpdate:

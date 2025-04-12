@@ -5,7 +5,11 @@ metadata:
 spec:
   minReadySeconds: 10
   paused: false
+<<<<<<< HEAD
   progressDeadlineSeconds: "six hundred"  # 錯wrong : should be int
+=======
+  progressDeadlineSeconds: "six hundred"  # 錯誤: 應輸入整數
+>>>>>>> 34c8534f562dda0e041a17986549af9e8c003fe4
   replicas: 3
   revisionHistoryLimit: 10
   selector:
