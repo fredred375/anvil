@@ -121,19 +121,40 @@ impl ResourceView for VDeploymentView {
         // replicas is non-negative
         &&& self.spec.replicas.is_Some() ==> self.spec.replicas.get_Some_0() >= 0
         // minReadySeconds, if present, must be non‑negative
-        &&& self.spec.minReadySeconds.is_Some() ==>
-            self.spec.minReadySeconds.get_Some_0() >= 0
+        // &&& self.spec.minReadySeconds.is_Some() ==>
+        //     self.spec.minReadySeconds.get_Some_0() >= 0
+        // minReadySeconds, if present, must be non‑negative
+        // &&& self.spec.minReadySeconds.is_Some() ==>
+        //     self.spec.minReadySeconds.get_Some_0() >= 0
+        // revisionHistoryLimit, if present, must be ≥ 0
+        // &&& self.spec.revisionHistoryLimit.is_Some() ==>
+        //     self.spec.revisionHistoryLimit.get_Some_0() >= 0
+        // // progressDeadlineSeconds, if present, must be ≥ 0
+        // &&& self.spec.progressDeadlineSeconds.is_Some() ==>
+        //     self.spec.progressDeadlineSeconds.get_Some_0() >= 0
+        // // If strategy provided, it should be Recreate or RollingUpdate
+        // &&& self.spec.strategy.is_Some() ==>
+        //     let strat = self.spec.strategy.get_Some_0();
+        //     (strat.type_ == "Recreate" || strat.type_ == "RollingUpdate")
+        // // RollingUpdate block only appear when type == "RollingUpdate"
+        // &&& strat.rollingUpdate.is_Some() ==> strat.type_ == "RollingUpdate"
+
+        // // Type == "RollingUpdate", a rollingUpdate block is required
+        // &&& strat.type_ == "RollingUpdate" ==> strat.rollingUpdate.is_Some()
+
+        // // If the rollingUpdate block is present, validate value
+        // &&& strat.rollingUpdate.is_Some() ==>
+        //     let ru = strat.rollingUpdate.get_Some_0();
+        //     // Both maxSurge and maxUnavailable must be IntOrString
+        //     (ru.maxSurge.is_Int() || ru.maxSurge.is_String())
+        //     && (ru.maxUnavailable.is_Int() || ru.maxUnavailable.is_String())
+        //     // If both are integers, they cannot both be zero
+        //     && !(ru.maxSurge.is_Int() && ru.maxSurge.get_Int_0() == 0
+        //         && ru.maxUnavailable.is_Int() && ru.maxUnavailable.get_Int_0() == 0)
         // selector exists, and its match_labels is not empty
         // TODO: revise it after supporting selector.match_expressions
         &&& self.spec.selector.match_labels.is_Some()
         &&& self.spec.selector.match_labels.get_Some_0().len() > 0
-        // selector must have at least one match_labels or match_expressions entry
-        &&& (
-            (self.spec.selector.get_Some_0().match_labels.is_Some()
-                && self.spec.selector.get_Some_0().match_labels.get_Some_0().len() > 0)
-        || (self.spec.selector.get_Some_0().match_expressions.is_Some()
-                && self.spec.selector.get_Some_0().match_expressions.get_Some_0().len() > 0)
-        )
         // template and its metadata ane spec exists
         &&& self.spec.template.is_Some()
         &&& self.spec.template.get_Some_0().metadata.is_Some()
