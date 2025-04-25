@@ -1,9 +1,5 @@
 /*
 open spec fn state_validation(self) -> bool {
-    // serviceName must not be empty
-    &&& self.spec.service_name.is_Some()
-    ==> self.spec.service_name.get_Some_0().len() > 0
-
     // selector exists, and its match_labels is not empty
     // TODO: revise it after supporting selector.match_expressions
     &&& self.spec.selector.match_labels.is_Some()
