@@ -1,8 +1,6 @@
 #! /usr/bin/env bash
 set -euo pipefail
 
-##test pr
-
 # first argument is resource crd folder name e.g. v2_vreplicaset
 
 # Cleanup: Remove old if exists (immutable)
